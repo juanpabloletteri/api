@@ -6,29 +6,11 @@ class usuario{
     private $_dni;
     private $_mail;
     private $_sexo;
+    private $_nombreusuario;
     private $_password;
-    private $_legajo;
-    private $_tipo;
-/*
-    function __construct($nombre,$apellido,$dni,$mail,$sexo,$password,$legajo,$tipo){
-        $this->_nombre = $nombre;
-        $this->_apellido = $apellido;
-        $this->_dni = $dni;
-        $this->_mail = $mail;
-        $this->_sexo = $sexo;
-        $this->_password = $password;
-        $this->_legajo = $legajo;
-        $this->_tipo = $tipo;
-    }*/
+
     //GETTERS Y SETTERS
-    public function getSexo()
-    {
-        return $this->_sexo;
-    }
-    public function setSexo($sexo)
-    {
-        $this->_sexo = $sexo;
-    }
+
     public function getNombre()
     {
         return $this->_nombre;
@@ -53,6 +35,30 @@ class usuario{
     {
         $this->_dni = $dni;
     }
+    public function getMail()
+    {
+        return $this->_mail;
+    }
+    public function setMail($mail)
+    {
+        $this->_mail = $mail;
+    }
+    public function getSexo()
+    {
+        return $this->_sexo;
+    }
+    public function setSexo($sexo)
+    {
+        $this->_sexo = $sexo;
+    }
+    public function getNombreusuario()
+    {
+        return $this->_nombreusuario;
+    }
+    public function setNombreusuario($nombreusuario)
+    {
+        $this->_nombreusuario = $nombreusuario;
+    }
     public function getPassword()
     {
         return $this->_password;
@@ -61,46 +67,85 @@ class usuario{
     {
         $this->_password = $pw;
     }
-    public function getLegajo()
-    {
-        return $this->_legajo;
-    }
-    public function setLegajo($leg)
-    {
-        $this->_legajo = $leg;
-    }
-    public function getTipo()
-    {
-        return $this->_tipo;
-    }
-    public function setTipo($tipo)
-    {
-        $this->_tipo = $tipo;
-    }
     //GETTERS Y SETTERS
 
     //*************************************************************ALTA DE USUARIOS*****************************************************************************************************
-    //*************************************************************ALTA DE USUARIOS*****************************************************************************************************
-    //ALTA DE PROFESOR
-    public static function AgregarProfesor($nombre,$apellido,$dni,$mail,$sexo)
+
+    public static function AgregarUsuario($nombre,$apellido,$dni,$mail,$sexo,$nombreusuario,$password)
     {
         $rta = false;
-        $legajo = usuario::UltimoProfesor();
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-        $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into  usuarios (nombre,apellido,dni,mail,password,tipo,legajo,sexo)values(:nombre,:apellido,:dni,:mail,:password,:tipo,:legajo,:sexo)");
+        $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into  
+        usuarios (nombre,apellido,dni,mail,sexo,nombreusuario,password)
+        values(:nombre,:apellido,:dni,:mail,:sexo,:nombreusuario,:password)");
+
         $consulta->bindValue(':nombre',$nombre);
         $consulta->bindValue(':apellido', $apellido);
         $consulta->bindValue(':dni', $dni);
         $consulta->bindValue(':mail',$mail);
-        $consulta->bindValue(':password', $dni);
-        $consulta->bindValue(':sexo', $sexo);
-        $consulta->bindValue(':tipo', 2);
-        $consulta->bindValue(':legajo', $legajo+1);
+        $consulta->bindValue(':sexo',$sexo);
+        $consulta->bindValue(':nombreusuario', $nombreusuario);
+        $consulta->bindValue(':password', $password);
+
         if($consulta->execute()){
             $rta = true;
         }
         return $rta; 
     }
+   //TRAER USUARIO POR ID
+   public static function TraerUsuarioPorId($id)
+   {
+       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios WHERE id=:id");
+       $consulta->bindValue(":id",$id);
+       $consulta->execute();
+       $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+       //$nombresusuario = json_encode($datos);
+       //return $nombresusuario;
+       return json_encode($datos);     
+   }
+    //TRAER MAILS
+    public static function TraerMails()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT mail FROM usuarios");
+        $consulta->execute();
+        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        //$mails = json_encode($datos);
+        //return $mails;
+        return json_encode($datos);
+    }
+   //TRAER NOMBRES DE USUARIO
+   public static function TraerNombreusuario()
+   {
+       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT nombreusuario FROM usuarios");
+       $consulta->execute();
+       $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+       //$nombresusuario = json_encode($datos);
+       //return $nombresusuario;
+       return json_encode($datos);     
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //ALTA DE ALUMNO
     public static function AgregarAlumno($nombre,$apellido,$dni,$mail,$sexo)
     {

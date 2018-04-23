@@ -4,16 +4,8 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 require_once './vendor/autoload.php';
 require_once './clases/AccesoDatos.php';
-require_once './clases/persona.php';
-require_once './clases/usuario.php';
-require_once './clases/cursada.php';
-require_once './clases/comision.php';
-require_once './clases/materia.php';
-require_once './clases/curso.php';
-require_once './clases/asistencia.php';
-require_once './clases/archivo.php';
-require_once './clases/encuesta.php';
 
+require_once './clases/usuario.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -29,20 +21,55 @@ desarrollo para obtener información sobre los errores
   La segunda línea permite al servidor web establecer el encabezado Content-Length, 
   lo que hace que Slim se comporte de manera más predecible.
 */
-//echo usuario::TraerAlumnos();
-//echo usuario::UltimoAlumno();
-//echo materia::AltaDeMateria("MATEMATICA II","17/5/17","403");
-/*echo materia::TraerTodasLasMaterias();
-echo materia::ModificarMateria(2,"MATEMATICA II",201);
-echo "<br>";
-echo materia::TraerTodasLasMaterias();*/
+
 $app = new \Slim\App(["settings" => $config]);
 
-//GET PARA DISTINTOS TIPOS DE USUARIOS
-$app->get('/todoslosUsuarios',function ($request,$response){
-    $response->write(usuario::TraerTodos());
+//ALTA USUARIO *******************/
+$app->post('/altaUsuario',function($request,$response){
+    $datos = $request->getParsedBody();
+    $nombre = $datos['nombre'];
+    $apellido = $datos['apellido'];
+    $dni = $datos['dni'];
+    $mail = $datos['mail'];
+    $sexo = $datos['sexo'];
+    $nombreusuario = $datos['nombreusuario'];
+    $password = $datos['password'];
+    $response->write(usuario::AgregarUsuario($nombre,$apellido,$dni,$mail,$sexo,$nombreusuario,$password));
+});
+
+//TRAER USUARIO POR ID *************************/
+$app->post('/traerUsuarioPorId',function ($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $response->write(usuario::TraerUsuarioPorId($id));
     return $response;
 });
+
+//TRAER MAILS *************************/
+$app->get('/traerMails',function ($request,$response){
+    $response->write(usuario::TraerMails());
+    return $response;
+});
+
+//TRAER NOMBRES DE USUARIO *************************/
+$app->get('/traerNombresusuario',function ($request,$response){
+    $response->write(usuario::TraerNombreusuario());
+    return $response;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+//GET PARA DISTINTOS TIPOS DE USUARIOS
+
 $app->get('/todoslosAlumnos',function ($reuqest,$response){
     $response->write(usuario::TraerAlumnos());
     return $response;
@@ -61,12 +88,12 @@ $app->get('/todoslosAdministrativos',function ($reuqest,$response){
 });
 
 //POST PARA OBTENER UN USUARIO POR ID
-$app->post('/traerUsuarioPorId',function ($request,$response){
+/*$app->post('/traerUsuarioPorId',function ($request,$response){
     $datos = $request->getParsedBody();
     $id = $datos['id'];
     $response->write(usuario::TraerUnUsuario($id));
     return $response;
-});
+});*/
 //ALTA PROFESOR*******************/
 $app->post('/altaProfesor',function($request,$response){
     $datos = $request->getParsedBody();
