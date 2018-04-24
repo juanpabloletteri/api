@@ -6,7 +6,7 @@ class usuario{
     private $_dni;
     private $_mail;
     private $_sexo;
-    private $_nombreusuario;
+    private $_apodoJugador;
     private $_password;
 
     //GETTERS Y SETTERS
@@ -51,13 +51,13 @@ class usuario{
     {
         $this->_sexo = $sexo;
     }
-    public function getNombreusuario()
+    public function getApodoJugador()
     {
-        return $this->_nombreusuario;
+        return $this->_apodoJugador;
     }
-    public function setNombreusuario($nombreusuario)
+    public function setApodoJugador($apodoJugador)
     {
-        $this->_nombreusuario = $nombreusuario;
+        $this->_apodoJugador = $apodoJugador;
     }
     public function getPassword()
     {
@@ -71,20 +71,20 @@ class usuario{
 
     //*************************************************************ALTA DE USUARIOS*****************************************************************************************************
 
-    public static function AgregarUsuario($nombre,$apellido,$dni,$mail,$sexo,$nombreusuario,$password)
+    public static function AgregarUsuario($nombre,$apellido,$dni,$mail,$sexo,$apodoJugador,$password)
     {
         $rta = false;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
         $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into  
-        usuarios (nombre,apellido,dni,mail,sexo,nombreusuario,password)
-        values(:nombre,:apellido,:dni,:mail,:sexo,:nombreusuario,:password)");
+        usuarios (nombre,apellido,dni,mail,sexo,apodoJugador,password)
+        values(:nombre,:apellido,:dni,:mail,:sexo,:apodoJugador,:password)");
 
         $consulta->bindValue(':nombre',$nombre);
         $consulta->bindValue(':apellido', $apellido);
         $consulta->bindValue(':dni', $dni);
         $consulta->bindValue(':mail',$mail);
         $consulta->bindValue(':sexo',$sexo);
-        $consulta->bindValue(':nombreusuario', $nombreusuario);
+        $consulta->bindValue(':apodoJugador', $apodoJugador);
         $consulta->bindValue(':password', $password);
 
         if($consulta->execute()){
@@ -126,10 +126,10 @@ class usuario{
         return json_encode($datos);
     }
    //TRAER NOMBRES DE USUARIO
-   public static function TraerNombreusuario()
+   public static function TraerApodoJugador()
    {
        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT nombreusuario FROM usuarios");
+       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT apodoJugador FROM usuarios");
        $consulta->execute();
        $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
        //$nombresusuario = json_encode($datos);

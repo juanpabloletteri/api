@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-04-2018 a las 01:30:10
+-- Tiempo de generación: 24-04-2018 a las 03:10:34
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.4
 
@@ -35,7 +35,7 @@ CREATE TABLE `usuarios` (
   `dni` int(11) NOT NULL,
   `mail` varchar(50) COLLATE utf16_spanish2_ci NOT NULL,
   `sexo` tinyint(1) NOT NULL,
-  `nombreusuario` varchar(50) COLLATE utf16_spanish2_ci NOT NULL,
+  `apodoJugador` varchar(50) COLLATE utf16_spanish2_ci NOT NULL,
   `password` varchar(50) COLLATE utf16_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
 
@@ -43,7 +43,7 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `dni`, `mail`, `sexo`, `nombreusuario`, `password`) VALUES
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `dni`, `mail`, `sexo`, `apodoJugador`, `password`) VALUES
 (1, 'juan', 'letteri', 2912454, 'asdfasd@asdasdd.cpm', 0, 'jp', '2912454'),
 (5, 'juan', 'letteri', 2912454, 'asdfasd@asdasdd.cpm1', 0, 'jp11', '123'),
 (7, 'juan panlo', 'letteri', 2912454, 'asdfasd@asdasd4d.cpm1', 0, 'jp1124', '123');
@@ -58,7 +58,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `dni`, `mail`, `sexo`, `nomb
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `mail` (`mail`),
-  ADD UNIQUE KEY `nombreusuario` (`nombreusuario`);
+  ADD UNIQUE KEY `nombreusuario` (`apodoJugador`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas

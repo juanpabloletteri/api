@@ -32,9 +32,9 @@ $app->post('/altaUsuario',function($request,$response){
     $dni = $datos['dni'];
     $mail = $datos['mail'];
     $sexo = $datos['sexo'];
-    $nombreusuario = $datos['nombreusuario'];
+    $apodoJugador = $datos['apodoJugador'];
     $password = $datos['password'];
-    $response->write(usuario::AgregarUsuario($nombre,$apellido,$dni,$mail,$sexo,$nombreusuario,$password));
+    $response->write(usuario::AgregarUsuario($nombre,$apellido,$dni,$mail,$sexo,$apodoJugador,$password));
 });
 
 //TRAER TODOS LOS USUARIOS *************************/
@@ -59,7 +59,7 @@ $app->get('/traerMails',function ($request,$response){
 
 //TRAER NOMBRES DE USUARIO *************************/
 $app->get('/traerNombresusuario',function ($request,$response){
-    $response->write(usuario::TraerNombreusuario());
+    $response->write(usuario::TraerApodoJugador());
     return $response;
 });
 
