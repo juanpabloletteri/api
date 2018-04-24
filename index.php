@@ -37,6 +37,12 @@ $app->post('/altaUsuario',function($request,$response){
     $response->write(usuario::AgregarUsuario($nombre,$apellido,$dni,$mail,$sexo,$nombreusuario,$password));
 });
 
+//TRAER TODOS LOS USUARIOS *************************/
+$app->get('/traerTodosLosUsuarios',function ($request,$response){
+    $response->write(usuario::TraerTodosLosUsuarios());
+    return $response;
+});
+
 //TRAER USUARIO POR ID *************************/
 $app->post('/traerUsuarioPorId',function ($request,$response){
     $datos = $request->getParsedBody();

@@ -92,6 +92,16 @@ class usuario{
         }
         return $rta; 
     }
+ 
+    //TRAER TODOS LOS USUARIOS
+    public static function TraerTodosLosUsuarios()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
    //TRAER USUARIO POR ID
    public static function TraerUsuarioPorId($id)
    {
@@ -219,7 +229,7 @@ class usuario{
     //***********************************************TRAER USUARIOS POR TIPO**********************************************************************************************************
     //***********************************************TRAER USUARIOS POR TIPO**********************************************************************************************************/
     //TRAER TODOS LOS USUARIOS
-    public static function TraerTodos()
+    /*public static function TraerTodos()
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios");
@@ -227,7 +237,7 @@ class usuario{
         $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
         $consulta = json_encode($consulta);
         return $consulta;
-    }
+    }*/
     //TRAER TODOS LOS ALUMNOS
     public static function TraerAlumnos()
     {       
