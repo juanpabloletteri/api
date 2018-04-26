@@ -63,6 +63,11 @@ $app->get('/traerNombresusuario',function ($request,$response){
     return $response;
 });
 
+//TRAER MAILS Y NOMBRES DE USUARIO *************************/
+$app->get('/traerMailsyApodos',function ($request,$response){
+    $response->write(usuario::TraerMailsyApodoJugador());
+    return $response;
+});
 
 
 

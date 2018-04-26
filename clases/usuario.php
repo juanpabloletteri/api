@@ -136,7 +136,17 @@ class usuario{
        //return $nombresusuario;
        return json_encode($datos);     
    }
-
+   //TRAER MAILS Y NOMBRES DE USUARIO
+   public static function TraerMailsyApodoJugador()
+   {
+       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT id, mail, apodoJugador FROM usuarios");
+       $consulta->execute();
+       $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+       //$nombresusuario = json_encode($datos);
+       //return $nombresusuario;
+       return json_encode($datos);     
+   }
 
 
 
