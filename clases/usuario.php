@@ -148,7 +148,17 @@ class usuario{
        return json_encode($datos);     
    }
 
-
+   //TRAER MAILS Y PASSWORDS DE USUARIO
+   public static function TraerMailsyPass()
+   {
+       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+       $consulta = $objetoAccesoDato->RetornarConsulta("SELECT id, mail, password FROM usuarios");
+       $consulta->execute();
+       $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+       //$nombresusuario = json_encode($datos);
+       //return $nombresusuario;
+       return json_encode($datos);     
+   }
 
 
 

@@ -69,6 +69,11 @@ $app->get('/traerMailsyApodos',function ($request,$response){
     return $response;
 });
 
+//TRAER MAILS Y CONTRASEÑAS *************************/
+$app->get('/traerMailsyPass',function ($request,$response){
+    $response->write(usuario::TraerMailsyPass());
+    return $response;
+});
 
 
 
