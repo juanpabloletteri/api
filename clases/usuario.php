@@ -160,10 +160,22 @@ class usuario{
        return json_encode($datos);     
    }
 
-
-
-
-
+   public static function SumarPuntos($id,$puntos1, $puntos2, $puntos3)
+   {
+       $rta = false;
+       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+       $consulta = $objetoAccesoDato->RetornarConsulta(
+           "UPDATE `usuarios` 
+           SET `puntos1`=:puntos1 ,`puntos2`=:puntos2, `puntos3`=:puntos3 WHERE id=:id");
+       $consulta->bindValue(':id',$id);
+       $consulta->bindValue(':puntos1',$puntos1);
+       $consulta->bindValue(':puntos2',$puntos2);
+       $consulta->bindValue(':puntos3',$puntos3);
+       if($consulta->execute()){
+           $rta = true;
+       }
+       return $rta;
+   }
 
 
 

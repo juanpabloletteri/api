@@ -75,6 +75,22 @@ $app->get('/traerMailsyPass',function ($request,$response){
     return $response;
 });
 
+//SUMAR PUNTOS *******************/
+$app->post('/sumarPuntos',function($request,$response){
+    $datos = $request->getParsedBody();
+    $id = $datos['id'];
+    $puntos1 = $datos['puntos1'];
+    $puntos2 = $datos['puntos2'];
+    $puntos3 = $datos['puntos3'];
+var_dump($datos);
+    $response->write(usuario::SumarPuntos($id,$puntos1,$puntos2,$puntos3));
+	
+});
+
+
+
+
+
 
 
 
