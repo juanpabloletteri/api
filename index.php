@@ -75,6 +75,12 @@ $app->get('/traerMailsyPass',function ($request,$response){
     return $response;
 });
 
+//TRAER PUNTOS *************************/
+$app->get('/traerPuntos',function ($request,$response){
+    $response->write(usuario::TraerPuntos());
+    return $response;
+});
+
 //SUMAR PUNTOS *******************/
 $app->post('/sumarPuntos',function($request,$response){
     $datos = $request->getParsedBody();

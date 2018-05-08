@@ -159,7 +159,15 @@ class usuario{
        //return $nombresusuario;
        return json_encode($datos);     
    }
-
+    //TRAER PUNTOS
+    public static function TraerPuntos()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT apodoJugador, puntos1, puntos2, puntos3 FROM usuarios ORDER BY puntos1");
+        $consulta->execute();
+        $consulta = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($consulta);
+    }
    public static function SumarPuntos($id,$puntos1, $puntos2, $puntos3)
    {
        $rta = false;
